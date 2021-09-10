@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-APP_NAME = 'AcerMJ'
+APP_NAME = 'acermj-bot'
 TOKEN = '1946057696:AAH_6iuHTvbodE72vYOzBpz_QZRqyT3Aq-E'
 PORT = int(os.environ.get('PORT', '8443'))
 
@@ -39,8 +39,8 @@ def main():
 
     updater.start_webhook(listen='0.0.0.0',
     port=PORT,
-    url_path=TOKEN)
-    updater.bot.set_webhook(APP_NAME + TOKEN)
+    url_path=TOKEN,
+    webhook_url="https://acermj-bot.herokuapp.com/" + TOKEN)
 
     updater.idle()
 
