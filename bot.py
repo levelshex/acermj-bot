@@ -3,6 +3,7 @@
 import logging
 import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CommandHandler
+from dbhelper import DBHelper
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -21,7 +22,19 @@ def help(update, context):
     update.message.reply_text('Help!')
 
 def echo(update, context):
+    update.message.reply_text("Hi there! This is the local server")
     update.message.reply_text(update.message.text)
+
+def add_booking(update, context):
+    try:
+        DBHelper.add_booking("2008-11-11", "kok", "morning")
+        update.message.reply_text("success")
+    except:
+        update.message.reply_text('error')
+
+def get_bookings(update, context):
+    update.message.reply_text("Hi there! This is the local server")
+    update.message.reply_text(DBHelper.get_bookings())
 
 def error(update, context):
     logger.warning(f'Update {update} caused error {context.error}')
@@ -32,6 +45,8 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("add", add_booking))
+    dp.add_handler(CommandHandler("show", get_bookings))
 
     dp.add_handler(MessageHandler(Filters.text, echo))
 
