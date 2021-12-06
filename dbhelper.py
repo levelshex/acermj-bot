@@ -7,7 +7,7 @@ class DBHelper:
     
     def setup(self):
         stmt = "CREATE TABLE IF NOT EXISTS bookings (date date, booker varchar(50), timing string check(timing = 'morning' or timing='afternoon' or timing='night' or timing='midnight)"
-        self.conn.execute(stmt, args)
+        self.conn.execute(stmt)
         self.conn.commit()
     
     def add_booking(self, time, booker, timing):
