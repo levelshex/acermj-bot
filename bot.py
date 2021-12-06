@@ -14,6 +14,9 @@ APP_NAME = 'acermj-bot'
 TOKEN = '1946057696:AAH_6iuHTvbodE72vYOzBpz_QZRqyT3Aq-E'
 PORT = int(os.environ.get('PORT', '8443'))
 
+db = DBHelper()
+db.setup()
+
 # Command handlers
 def start(update, context):
     update.message.reply_text('Hi!')
@@ -40,8 +43,6 @@ def error(update, context):
     logger.warning(f'Update {update} caused error {context.error}')
 
 def main():
-    dbHelper = DBHelper()
-    dbHelper.setup()
     updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
