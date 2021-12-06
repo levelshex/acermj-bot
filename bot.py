@@ -30,7 +30,7 @@ def echo(update, context):
 
 def add_booking(update, context):
     try:
-        DBHelper.add_booking("2008-11-11", "kok", "morning")
+        DBHelper.add_booking("today", "kok", "morning")
         update.message.reply_text("success")
     except:
         update.message.reply_text('error')
