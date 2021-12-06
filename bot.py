@@ -40,7 +40,8 @@ def error(update, context):
     logger.warning(f'Update {update} caused error {context.error}')
 
 def main():
-    DBHelper.setup()
+    dbHelper = DBHelper()
+    dbHelper.setup()
     updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
