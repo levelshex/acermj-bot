@@ -6,7 +6,7 @@ class DBHelper:
         self.conn = sqlite3.connect(dbname)
     
     def setup(self):
-        stmt = "CREATE TABLE IF NOT EXISTS bookings (date date, booker varchar(50), timing string check(timing = 'morning' or timing='afternoon' or timing='night' or timing='midnight)"
+        stmt = "CREATE TABLE IF NOT EXISTS bookings (date varchar(50), booker varchar(50), timing varchar(50))"
         self.conn.execute(stmt)
         self.conn.commit()
     
