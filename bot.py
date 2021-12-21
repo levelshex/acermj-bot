@@ -24,8 +24,7 @@ def start(update, context):
 def help(update, context):
     update.message.reply_text(parse_mode='Markdown', text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
 def echo(update, context):
-    update.message.reply_text("Hi there! This is the local server")
-    update.message.reply_text(update.message.text)
+    return
 
 def add_booking(update, context):
     try:
