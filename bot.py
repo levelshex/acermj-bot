@@ -3,6 +3,7 @@
 import logging
 import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CommandHandler
+from telegram import parse_mode
 from dbhelper import DBHelper
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -23,9 +24,8 @@ def start(update, context):
 
 def help(update, context):
     print('hehe')
-    #update.message.reply_text(parse_mode='Markdown', text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
+    update.message.reply_text(parse_mode=parse_mode.Markdown, text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
     update.message.reply_text('hehe')
-    update.message.reply_text("\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
 def echo(update, context):
     return
 
