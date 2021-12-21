@@ -22,7 +22,10 @@ def start(update, context):
     update.message.reply_text('Hi!')
 
 def help(update, context):
-    update.message.reply_text(parse_mode='Markdown', text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
+    print('hehe')
+    #update.message.reply_text(parse_mode='Markdown', text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
+    update.message.reply_text('hehe')
+    update.message.reply_text("\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
 def echo(update, context):
     return
 
