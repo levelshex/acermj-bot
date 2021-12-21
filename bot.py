@@ -22,22 +22,47 @@ def start(update, context):
     update.message.reply_text('Hi!')
 
 def help(update, context):
-    update.message.reply_text('Help!')
-
+    update.message.reply_text(parse_mode='Markdown',
+                              text="\"*/add <date> <start time> <end time> <table_type(optional)>*\" to add a booking.\n\"*/delete <date> <start time>*\" to delete a booking.\n<date> in \"YYYY-MM-DD\" format.\n<time> in \"HH:MM\" format.\n<table_type> either 'auto', 'normal' or 'other', 'auto' will be chosen if not specified.")
 def echo(update, context):
     update.message.reply_text("Hi there! This is the local server")
     update.message.reply_text(update.message.text)
 
 def add_booking(update, context):
     try:
-        DBHelper.add_booking("today", "kok", "morning")
-        update.message.reply_text("success")
+        name = update.message.from_user["username"]
+        db = DBHelper()
+        if is_valid_add(context.args):
+            if len(context.args) == 4:
+                db.add_booking(context.args[0], name, context.args[1] + ":00", context.args[2] + ":00", context.args[3])
+            else:
+                db.add_booking(context.args[0], name, context.args[1] + ":00", context.args[2] + ":00", 'auto')
+        else:
+            update.message.reply_text(
+                "/add <date> <start time> <end time> <table_type(optional)>\n e.g /add 2021-01-31 15:00 19:00 normal")
+        print("added")
+        get_bookings(update, context)
     except:
         update.message.reply_text('error')
 
 def get_bookings(update, context):
-    update.message.reply_text("Hi there! This is the local server")
-    update.message.reply_text(DBHelper.get_bookings())
+    try:
+        db = DBHelper()
+        bookings = db.get_bookings()
+        stmt = ''
+        if bookings:
+            stmt += "*AUTO TABLE*"
+            for booking in bookings['auto']:
+                stmt += '\n' + f"{booking[1]} {booking[0][5:]} {booking[2][:5]} - {booking[3][:5]}"
+            stmt += "\n\n*NORMAL TABLE*"
+            for booking in bookings['normal']:
+                stmt += '\n' + f"{booking[1]} {booking[0][5:]} {booking[2][:5]} - {booking[3][:5]}"
+            stmt += "\n\n*OTHER NORMAL TABLE*"
+            for booking in bookings['other']:
+                stmt += '\n' + f"{booking[1]} {booking[0][5:]} {booking[2][:5]} - {booking[3][:5]}"
+        update.message.reply_text(parse_mode='Markdown', text=stmt)
+    except:
+        update.message.reply_text('error')
 
 def error(update, context):
     logger.warning(f'Update {update} caused error {context.error}')
