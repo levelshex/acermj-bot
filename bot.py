@@ -32,7 +32,7 @@ def add_booking(update, context):
     try:
         name = update.message.from_user["username"]
         db = DBHelper()
-        if is_valid_add(context.args):
+        if True:
             if len(context.args) == 4:
                 db.add_booking(context.args[0], name, context.args[1] + ":00", context.args[2] + ":00", context.args[3])
             else:
