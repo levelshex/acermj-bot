@@ -19,6 +19,7 @@ class DBHelper:
         self.conn.commit()
 
     def delete_booking(self, date, booker, time_start, table):
+        print("Hello baby")
         stmt = f"DELETE FROM bookings WHERE (?)"
         args = (date, booker, time_start, table)
         self.cur.execute(stmt, args)
