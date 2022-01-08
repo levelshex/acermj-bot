@@ -3,7 +3,7 @@
 import logging
 import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CommandHandler
-from telegram import parse_mode
+from telegram import ParseMode
 from dbhelper import DBHelper
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
