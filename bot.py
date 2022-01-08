@@ -3,6 +3,7 @@
 import logging
 import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CommandHandler
+from telegram import parse_mode
 from dbhelper import DBHelper
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -23,15 +24,15 @@ def start(update, context):
 
 def help(update, context):
     update.message.reply_text(parse_mode=ParseMode.MARKDOWN_V2,text="\"*/add \<date\> \<start time\> \<end time\> \<table\_type\>*\" to add a booking\n\"*/delete \<date\> \<start time\>*\" to delete a booking\n\<date\> in \"_YYYY\-MM\-DD_\" format\n\<time\> in \"_HH:MM_\" format\n\<table\_type\> either 'auto', 'normal' or 'other'")
+
 def echo(update, context):
-    update.message.reply_text("Hi there! This is the local server")
-    update.message.reply_text(update.message.text)
+    return
 
 def add_booking(update, context):
     try:
         name = update.message.from_user["username"]
         db = DBHelper()
-        if is_valid_add(context.args):
+        if True:
             if len(context.args) == 4:
                 db.add_booking(context.args[0], name, context.args[1] + ":00", context.args[2] + ":00", context.args[3])
             else:
